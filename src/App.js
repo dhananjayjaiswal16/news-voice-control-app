@@ -10,9 +10,9 @@ const App = () => {
   useEffect(() => {
     alanBtn({
       key: APIkey,
-      onCommand: ({ commandData }) => {
-        if (commandData === 'testCommand') {
-          alert('Welcome to News App');
+      onCommand: ({ commandData, articles }) => {
+        if (commandData === 'newHeadlines') {
+          console.log("Articlea = " + articles);
         }
       }
     });
