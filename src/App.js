@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import alanBtn from "@alan-ai/alan-sdk-web";
-
+import NewsCards from './components/NewsCards/NewsCards'
 import './App.css';
-
+import useStyles from './styles'
 const APIkey = '6917ed5aebd1b49dc91f310fad260be92e956eca572e1d8b807a3e2338fdd0dc/stage';
 
 const App = () => {
+  const classes = useStyles();
+  const [newsArticles, setNewsArticles] = useState([]);
 
   useEffect(() => {
     alanBtn({
       key: APIkey,
       onCommand: ({ commandData, articles }) => {
         if (commandData === 'newHeadlines') {
-          console.log("Articlea = " + articles);
+          setNewsArticles(articles);
         }
       }
     });
@@ -21,7 +23,8 @@ const App = () => {
 
   return (
     <div>
-      <h1>News App ALAN AI</h1>
+
+      <NewsCards articles={newsArticles} />
     </div>
   );
 }
