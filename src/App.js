@@ -10,6 +10,7 @@ const APIkey = '6917ed5aebd1b49dc91f310fad260be92e956eca572e1d8b807a3e2338fdd0dc
 const App = () => {
   const classes = useStyles();
   const [newsArticles, setNewsArticles] = useState([]);
+  const [activeArticle, setActiveArticle] = useState(-1); //article index
 
   useEffect(() => {
     alanBtn({
@@ -17,6 +18,9 @@ const App = () => {
       onCommand: ({ commandData, articles }) => {
         if (commandData === 'newHeadlines') {
           setNewsArticles(articles);
+          setActiveArticle(-1);
+        } else if (commandData === 'currentArticle') {
+          setActiveArticle((prevArticle) => prevArticle + 1);
         }
       }
     });
@@ -27,7 +31,7 @@ const App = () => {
     <div>
       <Typography gutterBottom className={classes.topBar} variant='h4'>News App Powered by <a href="https://alan.app/"> <img className={alanLogo} src={alanLogo} alt="Alan Logo" /></a> </Typography>
 
-      <NewsCards articles={newsArticles} />
+      <NewsCards articles={newsArticles} activeArticle={activeArticle} />
     </div>
   );
 }

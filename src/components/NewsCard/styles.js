@@ -31,7 +31,7 @@ export default makeStyles({
     },
 
     activeCard: {
-        borderBottom: '10px solid #22289a',
+        borderBottom: '10px solid #2C9EFF',
     },
 
     details: {
