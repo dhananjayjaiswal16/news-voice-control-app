@@ -7,7 +7,7 @@ intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|lates
 
     //let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`;
 
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`
+    let NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=8a9823850b0646289d5015cd7bebb111'
 
     api.request(NEWS_API_URL, (error, response, body) => {
         const { articles } = JSON.parse(body);
@@ -22,7 +22,8 @@ intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|lates
         p.play({ commandData: 'newHeadlines', articles });
         p.play(`Here are (latest|recent) news `);
 
-
+        p.play('Would you like me to read the headlines for you?');
+        p.then(confirmation);
     })
 })
 
@@ -47,6 +48,9 @@ intent('(Give me | Show me | Get me | Tell me) the news from $(source* (.*))', (
 
         p.play({ commandData: 'newHeadlines', articles });
         p.play(`Here are (latest|recent|breaking) news from ${p.source.value}.`);
+
+        p.play('Would you like me to read the headlines for you?');
+        p.then(confirmation);
     })
 })
 
@@ -71,6 +75,9 @@ intent('What\'s up with $(term* (.*))', 'What\'s happening in the $(term* (.*)) 
 
         p.play({ commandData: 'newHeadlines', articles });
         p.play(`Here are (latest|recent) news on ${p.term.value}.`);
+
+        p.play('Would you like me to read the headlines for you?');
+        p.then(confirmation);
     })
 })
 
@@ -101,6 +108,21 @@ intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|lates
         p.play({ commandData: 'newHeadlines', articles });
         p.play(`Here are (latest|recent) news on ${p.C.value}.`);
 
+        p.play('Would you like me to read the headlines for you?');
+        p.then(confirmation);
+    })
+})
 
+
+const confirmation = context(() => {
+    intent('yes', async (p) => {
+        for (var i = 0; i < savedArticles.length; i++) {
+            p.play({ commandData: 'currentArticle', articles: savedArticles[i] })
+            p.play(`${savedArticles[i].title}`)
+        }
+    })
+
+    intent('no', p => {
+        p.play('Okay')
     })
 })
