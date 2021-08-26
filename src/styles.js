@@ -20,9 +20,6 @@ export default makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'rgba(21, 101, 192)',
     },
-    image: {
-        marginLeft: 20,
-    },
     card: {
         display: 'flex',
         justifyContent: 'center',
@@ -57,10 +54,8 @@ export default makeStyles((theme) => ({
         backgroundColor: '#2C9EFF',
         textAlign: 'center',
         padding: '15px',
-        color: 'white'
+        color: 'white',
+        position: 'relative',
+        top: '-28px'
     },
-    alanLogo: {
-        padding: '0px',
-        margin: '0px'
-    }
 }));
