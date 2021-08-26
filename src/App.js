@@ -28,7 +28,6 @@ const App = () => {
             parsedNumber = wordsToNumbers(number, { fuzzy: true })
           }
           const article = articles[parsedNumber - 1];
-          console.log("Number = " + parsedNumber);
           window.open(article.url, '_blank');
         }
       }
