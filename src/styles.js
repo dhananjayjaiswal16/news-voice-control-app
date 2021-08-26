@@ -53,4 +53,14 @@ export default makeStyles((theme) => ({
             flexDirection: 'column',
         },
     },
+    topBar: {
+        backgroundColor: '#2C9EFF',
+        textAlign: 'center',
+        padding: '15px',
+        color: 'white'
+    },
+    alanLogo: {
+        padding: '0px',
+        margin: '0px'
+    }
 }));
