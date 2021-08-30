@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import alanBtn from "@alan-ai/alan-sdk-web";
-import { Typography } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import NewsCards from './components/NewsCards/NewsCards';
-import alanLogo from './alanLogo.svg';
+import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
 import wordsToNumbers from 'words-to-numbers';
-import reactLogo from './react-logo.svg';
 import './App.css';
-import useStyles from './styles'
 const APIkey = '6917ed5aebd1b49dc91f310fad260be92e956eca572e1d8b807a3e2338fdd0dc/stage';
 
 const App = () => {
-  const classes = useStyles();
   const [newsArticles, setNewsArticles] = useState([]);
   const [activeArticle, setActiveArticle] = useState(-1); //article index
+
+  const [darkMode, setDarkMode] = useState(false);
+  const theme = createTheme({
+    palette: {
+      type: darkMode ? "dark" : "light"
+    },
+  });
 
   useEffect(() => {
     alanBtn({
@@ -42,21 +48,15 @@ const App = () => {
 
 
   return (
-    <div>
-      <Typography gutterBottom className={classes.topBar} variant='h4'><a href="https://alan.app/"><img src={alanLogo} alt="Alan Logo" style={{ position: 'relative', top: '20px' }} height='60px' /></a> powered news app</Typography>
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Footer newsArticles={newsArticles} />
+        <NewsCards articles={newsArticles} activeArticle={activeArticle} />
 
-      <NewsCards articles={newsArticles} activeArticle={activeArticle} />
 
-      {!newsArticles.length ? (
-        <div className={classes.footer}>
-          <Typography variant="body1" component="h2">
-            Ⓒ Created using <img src={reactLogo} alt="react-svg" height='30px' style={{ position: 'relative', top: '9px' }} /> by
-            <a className={classes.link} href="https://github.com/dhananjayjaiswal16"> DJ</a>
-          </Typography>
-          <img src={alanLogo} height="50px" alt="JSMastery logo" />
-        </div>
-      ) : null}
-    </div>
+      </Paper>
+    </ThemeProvider>
   );
 }
 

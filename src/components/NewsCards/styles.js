@@ -24,6 +24,12 @@ export default makeStyles({
         width: '100%',
         margin: '0px'
     },
+    container1: {
+        padding: '0 5%',
+        width: '100%',
+        margin: '0px',
+        minHeight: 'calc(100vh - 91px)'
+    }
 
 
 });

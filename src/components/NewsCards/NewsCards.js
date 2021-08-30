@@ -18,25 +18,24 @@ const NewsCards = ({ articles, activeArticle }) => {
 
     if (articles.length === 0) {
         return (
-            <Grow in>
-                <Grid className={classes.container} spacing={3} container alignItems="stretch">
-                    {infoCards.map((infoCard) => (
-                        <Grid item className={classes.infoCard} xs={12} sm={6} md={4} lg={3}>
-                            <div className={classes.card} style={{ backgroundColor: infoCard.color }} >
-                                <Typography variant='h5' component='h5'>{infoCard.title}</Typography>
-                                {infoCard.info ?
-                                    (<Typography variant='h6' component='h6'>
-                                        <strong>{infoCard.title.split(' ')[2]}</strong>
-                                        <br />
-                                        {infoCard.info}
-                                    </Typography>) : null
-                                }
-                                <Typography variant='h6'>Try Saying : <i>{infoCard.text}</i></Typography>
-                            </div>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Grow>
+
+            <Grid className={classes.container1} spacing={3} container alignItems="stretch">
+                {infoCards.map((infoCard) => (
+                    <Grid item className={classes.infoCard} xs={12} sm={6} md={4} lg={3}>
+                        <div className={classes.card} style={{ backgroundColor: infoCard.color }} >
+                            <Typography variant='h5' component='h5'>{infoCard.title}</Typography>
+                            {infoCard.info ?
+                                (<Typography variant='h6' component='h6'>
+                                    <strong>{infoCard.title.split(' ')[2]}</strong>
+                                    <br />
+                                    {infoCard.info}
+                                </Typography>) : null
+                            }
+                            <Typography variant='h6'>Try Saying : <i>{infoCard.text}</i></Typography>
+                        </div>
+                    </Grid>
+                ))}
+            </Grid>
         );
     }
 
